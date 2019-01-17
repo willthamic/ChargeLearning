@@ -16,12 +16,4 @@ namespace ChargeLearning
             BlazorWebAssemblyHost.CreateDefaultBuilder()
                 .UseBlazorStartup<Startup>();
     }
-
-
-
-    
-
-    
-
-    
 }

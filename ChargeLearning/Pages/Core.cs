@@ -11,23 +11,38 @@ namespace ChargeLearning.Pages
         protected BECanvasComponent _canvas;
         private Canvas2dContext _ctx;
 
+        private Scene scene;
+        private ChargeSet charges;
+
         //[Inject]
         //protected HttpClient Http { get; set; }
 
         protected override void OnAfterRender()
         {
-            _ctx = _canvas.CreateCanvas2d();
-            Console.WriteLine("Canvas happening");
-            _ctx.FillStyle = "gray";
-            _ctx.FillRect(0, 0, 500, 500);
+            //_ctx = _canvas.CreateCanvas2d();
+            //Console.WriteLine("Canvas happening");
+            //_ctx.FillStyle = "white";
+            //_ctx.FillRect(0, 0, 500, 500);
         }
 
         public void Frame()
         {
             _ctx = _canvas.CreateCanvas2d();
             Console.WriteLine("Canvas happening");
-            _ctx.FillStyle = "gray";
-            _ctx.FillRect(0, 0, 500, 500);
+
+            scene = new Scene(0, 500, 0, 500, new V(250, 500), new V(250, 0), 1, new Random());
+            charges = new ChargeSet();
+
+            Console.WriteLine("Made the scene");
+            charges.AdjustCount(10, scene);
+            Console.WriteLine("Adjusted Count");
+
+            foreach (Charge charge in charges.set)
+            {
+                Console.WriteLine("Draw Charge");
+                _ctx.FillStyle = "gray";
+                _ctx.FillRect(charge.location.x, charge.location.y, 5, 5);
+            }
         }
         
     }
@@ -123,7 +138,7 @@ namespace ChargeLearning.Pages
     public class Charge
     {
         private double magnitude { get; set; }
-        private V location { get; set; }
+        public V location { get; set; }
 
         public Charge(double magnitude, double x, double y)
         {
@@ -155,7 +170,7 @@ namespace ChargeLearning.Pages
 
     public class ChargeSet
     {
-        private HashSet<Charge> set { get; }
+        public HashSet<Charge> set { get; }
 
         public ChargeSet()
         {
@@ -207,7 +222,15 @@ namespace ChargeLearning.Pages
 
     public class Particle
     {
-        private V location { get; set; }
-        private V velocity { get; set; }
+        public Scene scene { get; }
+        public V location { get; }
+        public V velocity { get; }
+
+        public Particle (Scene scene)
+        {
+            this.scene = scene;
+            location = scene.start;
+            velocity = new V(0, 0);
+        }
     }
 }
