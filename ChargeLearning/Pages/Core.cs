@@ -117,4 +117,37 @@ namespace ChargeLearning.Pages
             this.random = random;
         }
     }
+
+    public class Charge
+    {
+        private double magnitude { get; set; }
+        private V location { get; set; }
+
+        public Charge(double magnitude, double x, double y)
+        {
+            this.magnitude = magnitude;
+            this.location = new V(x, y);
+        }
+
+        public Charge(double magnitude, V location)
+        {
+            this.magnitude = magnitude;
+            this.location = location;
+        }
+
+        public void Mutate(double magnitudeFactor, double locationFactor, Scene scene)
+        {
+            magnitude += (scene.random.NextDouble() - 0.5) * magnitudeFactor;
+            V locationAdjust = V.RandomInRange(scene, locationFactor);
+            location = location + locationAdjust;
+        }
+
+        public V FieldAtPoint(V location)
+        {
+            V rVector = location - this.location;
+            double rMag = rVector.Magnitude();
+            V rUnit = rVector.Unit();
+            return magnitude / (rMag * rMag) * rUnit;
+        }
+    }
 }
