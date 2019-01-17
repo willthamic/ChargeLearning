@@ -80,4 +80,41 @@ namespace ChargeLearning.Pages
             return (1 / this.Magnitude()) * this;
         }
     }
+
+    public class Scene
+    {
+        public double xMin { get; }
+        public double xMax { get; }
+        public double yMin { get; }
+        public double yMax { get; }
+
+        public V start { get; }
+        public V end { get; }
+        public double endTolerance { get; }
+
+        public Random random { get; }
+
+        public Scene(
+            double xMin,
+            double xMax,
+            double yMin,
+            double yMax,
+            V start,
+            V end,
+            double endTolerance,
+            Random random
+            )
+        {
+            this.xMin = xMin;
+            this.xMax = xMax;
+            this.yMin = yMin;
+            this.yMax = yMax;
+
+            this.start = start;
+            this.end = end;
+            this.endTolerance = endTolerance;
+
+            this.random = random;
+        }
+    }
 }

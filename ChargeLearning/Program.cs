@@ -17,93 +17,9 @@ namespace ChargeLearning
                 .UseBlazorStartup<Startup>();
     }
 
-    public class Scene
-    {
-        public double xMin { get; }
-        public double xMax { get; }
-        public double yMin { get; }
-        public double yMax { get; }
 
-        public V start { get; }
-        public V end { get; }
-        public double endTolerance { get; }
 
-        public Random random { get; }
-
-        public Scene(
-            double xMin,
-            double xMax,
-            double yMin,
-            double yMax,
-            V start,
-            V end,
-            double endTolerance,
-            Random random
-            )
-        {
-            this.xMin = xMin;
-            this.xMax = xMax;
-            this.yMin = yMin;
-            this.yMax = yMax;
-
-            this.start = start;
-            this.end = end;
-            this.endTolerance = endTolerance;
-            
-            this.random = random;
-        }
-    }
-
-    public class V
-    {
-        public double x { get; set; }
-        public double y { get; set; }
-
-        public V (double x, double y)
-        {
-            this.x = x;
-            this.y = y;
-        }
-
-        public static V operator +(V a, V b)
-        {
-            return new V(a.x + b.x, a.y + b.y);
-        }
-
-        public static V operator -(V a, V b)
-        {
-            return new V(a.x - b.x, a.y - b.y);
-        }
-
-        public static V operator *(double a, V b)
-        {
-            return new V(a * b.x, a * b.y);
-        }
-
-        public static V RandomLocation(Scene scene)
-        {
-            double x = scene.random.NextDouble() * (scene.xMax - scene.xMin) + scene.xMin;
-            double y = scene.random.NextDouble() * (scene.yMax - scene.yMin) + scene.yMin;
-            return new V(x, y);
-        }
-
-        public static V RandomInRange(Scene scene, double radius)
-        {
-            double mag = scene.random.NextDouble() * radius;
-            double theta = scene.random.NextDouble() * 2 * Math.PI;
-            return mag * new V(Math.Cos(theta), Math.Sin(theta));
-        }
-
-        public double Magnitude()
-        {
-            return Math.Sqrt(x * x + y * y);
-        }
-
-        public V Unit()
-        {
-            return (1 / this.Magnitude()) * this;
-        }
-    }
+    
 
     public class Charge
     {
