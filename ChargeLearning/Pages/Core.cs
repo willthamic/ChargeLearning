@@ -225,6 +225,11 @@ namespace ChargeLearning.Pages
             V rUnit = rVector.Unit();
             return magnitude / (rMag * rMag) * rUnit;
         }
+
+        public void Draw(Canvas2dContext _ctx)
+        {
+            _ctx.FillStyle = "gray";
+        }
     }
 
     public class ChargeSet

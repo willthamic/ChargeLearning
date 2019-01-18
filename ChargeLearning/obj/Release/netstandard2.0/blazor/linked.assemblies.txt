@@ -1,0 +1,16 @@
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Release\netstandard2.0\blazor\linker\Blazor.Extensions.Canvas.dll
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Release\netstandard2.0\blazor\linker\Blazor.Extensions.Canvas.JS.dll
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Release\netstandard2.0\blazor\linker\ChargeLearning.dll
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Release\netstandard2.0\blazor\linker\Microsoft.AspNetCore.Blazor.Browser.dll
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Release\netstandard2.0\blazor\linker\Microsoft.AspNetCore.Blazor.dll
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Release\netstandard2.0\blazor\linker\Microsoft.AspNetCore.Blazor.TagHelperWorkaround.dll
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Release\netstandard2.0\blazor\linker\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Release\netstandard2.0\blazor\linker\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Release\netstandard2.0\blazor\linker\Microsoft.JSInterop.dll
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Release\netstandard2.0\blazor\linker\Mono.WebAssembly.Interop.dll
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Release\netstandard2.0\blazor\linker\mscorlib.dll
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Release\netstandard2.0\blazor\linker\System.Core.dll
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Release\netstandard2.0\blazor\linker\System.dll
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Release\netstandard2.0\blazor\linker\System.Net.Http.dll
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Release\netstandard2.0\blazor\linker\Blazor.Extensions.Canvas.pdb
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Release\netstandard2.0\blazor\linker\ChargeLearning.pdb
