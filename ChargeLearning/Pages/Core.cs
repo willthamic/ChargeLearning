@@ -13,6 +13,8 @@ namespace ChargeLearning.Pages
 
         private Scene scene;
         private ChargeSet charges;
+        private Particle particle;
+        private bool first = true;
 
         //[Inject]
         //protected HttpClient Http { get; set; }
@@ -30,12 +32,24 @@ namespace ChargeLearning.Pages
             _ctx = _canvas.CreateCanvas2d();
             Console.WriteLine("Canvas happening");
 
-            scene = new Scene(0, 500, 0, 500, new V(250, 500), new V(250, 0), 1, new Random());
-            charges = new ChargeSet();
+            if (first)
+            {
+                scene = new Scene(0, 500, 0, 500, new V(250, 250), new V(250, 0), 1, new Random());
+                Console.WriteLine("Made the scene");
 
-            Console.WriteLine("Made the scene");
-            charges.AdjustCount(10, scene);
-            Console.WriteLine("Adjusted Count");
+                charges = new ChargeSet();
+                charges.AdjustCount(10, scene);
+                charges.Mutate(1000000, 0, 0, scene);
+                Console.WriteLine("Adjusted Count");
+
+                particle = new Particle(scene.start);
+                first = false;
+            }
+
+            particle.PassTime(.1, charges);
+            _ctx.FillStyle = "red";
+            _ctx.FillRect(particle.location.x, particle.location.y, 5, 5);
+            Console.WriteLine(particle.location.x + " " + particle.location.y);
 
             foreach (Charge charge in charges.set)
             {
@@ -43,6 +57,8 @@ namespace ChargeLearning.Pages
                 _ctx.FillStyle = "gray";
                 _ctx.FillRect(charge.location.x, charge.location.y, 5, 5);
             }
+
+
         }
         
     }
@@ -222,15 +238,19 @@ namespace ChargeLearning.Pages
 
     public class Particle
     {
-        public Scene scene { get; }
-        public V location { get; }
-        public V velocity { get; }
+        public V location { get; set; }
+        public V velocity { get; set; }
 
-        public Particle (Scene scene)
+        public Particle (V start)
         {
-            this.scene = scene;
-            location = scene.start;
+            location = start;
             velocity = new V(0, 0);
+        }
+
+        public void PassTime (double delta, ChargeSet charges)
+        {
+            velocity += delta * charges.FieldAtPoint(location);
+            location += delta * velocity;
         }
     }
 }
