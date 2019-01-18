@@ -49,7 +49,7 @@ namespace ChargeLearning.Pages
             particle.PassTime(.1, charges);
             _ctx.FillStyle = "red";
             _ctx.FillRect(particle.location.x, particle.location.y, 5, 5);
-            Console.WriteLine(particle.location.x + " " + particle.location.y);
+            Console.WriteLine("Location: " + particle.location.x + " " + particle.location.y);
 
             foreach (Charge charge in charges.set)
             {
@@ -58,7 +58,11 @@ namespace ChargeLearning.Pages
                 _ctx.FillRect(charge.location.x, charge.location.y, 5, 5);
             }
 
-
+            if (scene.InBounds(particle.location))
+            {
+                Console.WriteLine("ping");
+                Frame();
+            }
         }
         
     }
@@ -127,6 +131,8 @@ namespace ChargeLearning.Pages
 
         public Random random { get; }
 
+        public HashSet<Rect> walls { get; }
+
         public Scene(
             double xMin,
             double xMax,
@@ -148,6 +154,43 @@ namespace ChargeLearning.Pages
             this.endTolerance = endTolerance;
 
             this.random = random;
+            walls = new HashSet<Rect>();
+        }
+
+        public void AddWall(Rect wall)
+        {
+            walls.Add(wall);
+        }
+
+        public bool InBounds (V location)
+        {
+            foreach (Rect wall in walls)
+            {
+                if (wall.IsInside(location))
+                    return false;
+            }
+            return location.x > xMin && location.x < xMax && location.y > yMin && location.y < yMax;
+        }
+    }
+
+    public class Rect
+    {
+        public double xMin { get; }
+        public double xMax { get; }
+        public double yMin { get; }
+        public double yMax { get; }
+
+        public Rect(double xMin, double xMax, double yMin, double yMax)
+        {
+            this.xMin = xMin;
+            this.xMax = xMax;
+            this.yMin = yMin;
+            this.yMax = yMax;
+        }
+
+        public bool IsInside(V location)
+        {
+            return location.x > xMin && location.x < xMax && location.y > yMin && location.y < yMax;
         }
     }
 
@@ -236,6 +279,32 @@ namespace ChargeLearning.Pages
         }
     }
 
+    public class ChargeSetSet
+    {
+        public HashSet<ChargeSet> setset { get; set; }
+
+        public ChargeSetSet (int herdCount, int chargeCount, double magnitudeFactor, Scene scene)
+        {
+            setset = new HashSet<ChargeSet>();
+            for (int i = 0; i < chargeCount; i++)
+            {
+                ChargeSet temp = new ChargeSet();
+                temp.AdjustCount(chargeCount, scene);
+                temp.Mutate(magnitudeFactor, 0, 0, scene);
+                setset.Add(temp);
+            }
+        }
+
+        public void Mutate(double magnitudeFactor, double locationFactor, double countFactor, Scene scene)
+        {
+            foreach (ChargeSet set in setset)
+            {
+                set.Mutate(magnitudeFactor, locationFactor, countFactor, scene);
+            }
+        }
+
+    }
+
     public class Particle
     {
         public V location { get; set; }
@@ -253,4 +322,5 @@ namespace ChargeLearning.Pages
             location += delta * velocity;
         }
     }
+
 }
