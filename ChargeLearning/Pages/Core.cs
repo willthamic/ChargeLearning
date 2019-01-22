@@ -33,7 +33,7 @@ namespace ChargeLearning.Pages
             if (first)
             {
                 scene = new Scene(0, 500, 0, 500, new V(250, 490), new V(250, 0), 1, new Random());
-                parts = new ParticleSet(100, 10, 1000000, scene);
+                parts = new ParticleSet(5, 3, 1000000, scene);
                 i = 0;
                 first = false;
             }
@@ -51,8 +51,13 @@ namespace ChargeLearning.Pages
         public void Evolve()
         {
             _ctx.ClearRect(0, 0, 500, 500);
-            LinkedList<Particle> temp = parts.FindTop(1);
-            parts = new ParticleSet(100, temp, scene);
+            LinkedList<Particle> temp = parts.FindTop(2);
+            Console.WriteLine(parts.ToString(true, true));
+            parts = new ParticleSet(5, temp, scene);
+            //Console.WriteLine(parts.set.First().charges.set.Count);
+            parts.Mutate(1000000, 100, 1, scene);
+            Console.WriteLine(parts.ToString(true, true));
+            i = 0;
         }
         
     }
@@ -111,6 +116,11 @@ namespace ChargeLearning.Pages
         public V Unit()
         {
             return (1 / this.Magnitude()) * this;
+        }
+
+        public override String ToString()
+        {
+            return "(" + Math.Round(x) + "," + Math.Round(y) + ")";
         }
     }
 
@@ -240,6 +250,13 @@ namespace ChargeLearning.Pages
             _ctx.FillStyle = "gray";
             _ctx.FillRect(location.x, location.y, 2, 2);
         }
+
+        public override String ToString()
+        {
+            String str = "M:" + Math.Round(magnitude) + "-";
+            str += location.ToString();
+            return str;
+        }
     }
 
     public class ChargeSet
@@ -254,7 +271,7 @@ namespace ChargeLearning.Pages
         public ChargeSet(ChargeSet chargeSet)
         {
             set = new HashSet<Charge>();
-            foreach (Charge charge in set)
+            foreach (Charge charge in chargeSet.set)
             {
                 set.Add(new Charge(charge));
             }
@@ -308,6 +325,17 @@ namespace ChargeLearning.Pages
             {
                 charge.Draw(_ctx);
             }
+        }
+
+        public override String ToString()
+        {
+            String str = "{ ";
+            foreach (Charge charge in set)
+            {
+                str += charge.ToString() + " ";
+            }
+            str += "}";
+            return str;
         }
     }
 
@@ -377,6 +405,16 @@ namespace ChargeLearning.Pages
             {
                 fitness = (true, time);
             }
+        }
+
+        public String ToString(bool partCharges)
+        {
+            String str = "L: " + location.ToString() + "  V: " + velocity.ToString();
+            if (!partCharges)
+                return str;
+
+            str += charges.ToString();
+            return str;
         }
     }
 
@@ -505,6 +543,19 @@ namespace ChargeLearning.Pages
                 // neither finished
                 return (a.fitness.Item2 < b.fitness.Item2);
             }
+        }
+
+        public String ToString(bool subParts, bool subPartCharges)
+        {
+            String str = "ParticleSet - Count: " + set.Count;
+            if (!subParts)
+                return str;
+
+            foreach (Particle part in set)
+            {
+                str += "    " + part.ToString(subPartCharges);
+            }
+            return str;
         }
     }
 
