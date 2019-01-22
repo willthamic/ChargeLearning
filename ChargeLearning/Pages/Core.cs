@@ -32,7 +32,7 @@ namespace ChargeLearning.Pages
 
             if (first)
             {
-                scene = new Scene(0, 500, 0, 500, new V(250, 250), new V(250, 0), 1, new Random());
+                scene = new Scene(0, 500, 0, 500, new V(250, 490), new V(250, 0), 1, new Random());
 
                 parts = new ParticleSet(100, 10, 1000000, scene);
 
@@ -42,17 +42,23 @@ namespace ChargeLearning.Pages
             }
 
             parts.Draw(_ctx, false);
-            parts.PassTime(.1);
+            parts.PassTime(.05);
+
+            
 
 
             i++;
             if (i < 100)
             {
-                Console.WriteLine("K");
                 Frame();
-                Console.WriteLine("Y");
             }
-            Console.WriteLine("Z");
+        }
+
+        public void Evolve()
+        {
+            _ctx.ClearRect(0, 0, 500, 500);
+            var temp = parts.FindTop(1);
+            parts = new ParticleSet(100, temp, scene);
         }
         
     }
@@ -163,6 +169,11 @@ namespace ChargeLearning.Pages
             }
             return location.x > xMin && location.x < xMax && location.y > yMin && location.y < yMax;
         }
+
+        public bool InEnd (V location)
+        {
+            return (location - end).Magnitude() < endTolerance;
+        }
     }
 
     public class Rect
@@ -228,7 +239,6 @@ namespace ChargeLearning.Pages
     public class ChargeSet
     {
         public HashSet<Charge> set { get; }
-        public bool alive = true;
 
         public ChargeSet()
         {
@@ -294,6 +304,12 @@ namespace ChargeLearning.Pages
         public Scene scene { get; set; }
         public ChargeSet charges { get; set; }
 
+        public bool alive = true;
+
+        public double time = 0;
+
+        public (bool, double) fitness = (false, double.MaxValue);
+
         public Particle(Scene scene, ChargeSet charges)
         {
             location = scene.start;
@@ -304,12 +320,16 @@ namespace ChargeLearning.Pages
 
         public void PassTime(double delta)
         {
+            if (!alive)
+                return;
+
             velocity += delta * charges.FieldAtPoint(location);
             location += delta * velocity;
+            time += delta;
 
-            if (scene.InBounds(location))
+            if (!scene.InBounds(location))
             {
-
+                alive = false;
             }
         }
 
@@ -322,6 +342,18 @@ namespace ChargeLearning.Pages
 
             _ctx.FillStyle = "red";
             _ctx.FillRect(location.x, location.y, 1, 1);
+        }
+
+        public void CalculateFitness()
+        {
+            if (scene.InEnd(location))
+            {
+                fitness = (true, (location - scene.end).Magnitude());
+            }
+            else
+            {
+                fitness = (true, time);
+            }
         }
     }
 
@@ -339,6 +371,16 @@ namespace ChargeLearning.Pages
                 temp.Mutate(magnitudeFactor, 0, 0, scene);
                 Particle part = new Particle(scene, temp);
                 set.Add(part);
+            }
+        }
+
+        public ParticleSet (int herdCount, LinkedList<Particle> bestParts, Scene scene)
+        {
+            set = new HashSet<Particle>();
+
+            for (int i = 0; i < herdCount; i++)
+            {
+                set.Add(bestParts.ElementAt(i % bestParts.Count));
             }
         }
 
@@ -363,6 +405,69 @@ namespace ChargeLearning.Pages
             foreach (Particle part in set)
             {
                 part.PassTime(delta);
+            }
+        }
+
+        public void CalculateFitness()
+        {
+            foreach (Particle part in set)
+            {
+                part.CalculateFitness();
+            }
+        }
+
+        public LinkedList<Particle> FindTop(int count)
+        {
+            CalculateFitness();
+            LinkedList<Particle> parts = new LinkedList<Particle>();
+
+            foreach (Particle part in set)
+            {
+                InsertParticle(count, ref parts, part);
+            }
+            return parts;
+        }
+
+        public void InsertParticle(int count, ref LinkedList<Particle> parts, Particle insertPart)
+        {
+            if (parts.Count == 0)
+            {
+                parts.AddFirst(insertPart);
+            }
+            foreach (Particle testPart in parts)
+            {
+                if (IsMoreFit(testPart, insertPart))
+                {
+                    parts.AddBefore(parts.Find(testPart), insertPart);
+                    if (parts.Count >= count)
+                    {
+                        parts.Remove(testPart);
+                    }
+                }
+            }
+        }
+
+        public static bool IsMoreFit(Particle a, Particle b)
+        {
+            if (a.fitness.Item1 && b.fitness.Item1)
+            {
+                // both finished
+                return (a.fitness.Item2 < b.fitness.Item2);
+            }
+            else if (a.fitness.Item1 && !b.fitness.Item1)
+            {
+                // only a finished
+                return true;
+            }
+            else if (!a.fitness.Item1 && b.fitness.Item1)
+            {
+                // only b finished
+                return false;
+            }
+            else
+            {
+                // neither finished
+                return (a.fitness.Item2 > b.fitness.Item2);
             }
         }
     }
