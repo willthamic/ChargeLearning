@@ -685,23 +685,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Will Hamic\\.nuget\\packages\\": {},
+    "C:\\Users\\Will\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Will Hamic\\OneDrive\\Mine\\Code\\C#\\ChargeLearning\\ChargeLearning\\ChargeLearning.csproj",
+      "projectUniqueName": "C:\\Users\\Will\\OneDrive\\Mine\\Code\\C#\\ChargeLearning\\ChargeLearning\\ChargeLearning.csproj",
       "projectName": "ChargeLearning",
-      "projectPath": "C:\\Users\\Will Hamic\\OneDrive\\Mine\\Code\\C#\\ChargeLearning\\ChargeLearning\\ChargeLearning.csproj",
-      "packagesPath": "C:\\Users\\Will Hamic\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Will Hamic\\OneDrive\\Mine\\Code\\C#\\ChargeLearning\\ChargeLearning\\obj\\",
+      "projectPath": "C:\\Users\\Will\\OneDrive\\Mine\\Code\\C#\\ChargeLearning\\ChargeLearning\\ChargeLearning.csproj",
+      "packagesPath": "C:\\Users\\Will\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Will\\OneDrive\\Mine\\Code\\C#\\ChargeLearning\\ChargeLearning\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Will Hamic\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Will\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -709,6 +709,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Users\\Will\\Desktop": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

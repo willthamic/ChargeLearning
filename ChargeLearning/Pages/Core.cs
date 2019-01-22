@@ -12,52 +12,47 @@ namespace ChargeLearning.Pages
         private Canvas2dContext _ctx;
 
         private Scene scene;
-        private ChargeSet charges;
-        private Particle particle;
+        //private ChargeSet charges;
+        private ParticleSet parts;
         private bool first = true;
+        private int i;
 
         //[Inject]
         //protected HttpClient Http { get; set; }
 
         protected override void OnAfterRender()
         {
-            //_ctx = _canvas.CreateCanvas2d();
-            //Console.WriteLine("Canvas happening");
-            //_ctx.FillStyle = "white";
-            //_ctx.FillRect(0, 0, 500, 500);
+            
         }
 
         public void Frame()
         {
+
             _ctx = _canvas.CreateCanvas2d();
-            Console.WriteLine("Canvas happening");
 
             if (first)
             {
                 scene = new Scene(0, 500, 0, 500, new V(250, 250), new V(250, 0), 1, new Random());
-                Console.WriteLine("Made the scene");
 
-                charges = new ChargeSet();
-                charges.AdjustCount(10, scene);
-                charges.Mutate(1000000, 0, 0, scene);
-                Console.WriteLine("Adjusted Count");
+                parts = new ParticleSet(100, 10, 1000000, scene);
 
-                particle = new Particle(ref scene, charges);
+                i = 0;
+
                 first = false;
             }
 
-            particle.PassTime(.1);
-            particle.Draw(_ctx, true);
-            
-            Console.WriteLine("Location: " + particle.location.x + " " + particle.location.y);
+            parts.Draw(_ctx, false);
+            parts.PassTime(.1);
 
-            
 
-            if (scene.InBounds(particle.location))
+            i++;
+            if (i < 100)
             {
-                Console.WriteLine("ping");
+                Console.WriteLine("K");
                 Frame();
+                Console.WriteLine("Y");
             }
+            Console.WriteLine("Z");
         }
         
     }
@@ -159,6 +154,8 @@ namespace ChargeLearning.Pages
 
         public bool InBounds (V location)
         {
+            if ((location - end).Magnitude() < endTolerance)
+
             foreach (Rect wall in walls)
             {
                 if (wall.IsInside(location))
@@ -224,13 +221,14 @@ namespace ChargeLearning.Pages
         public void Draw(Canvas2dContext _ctx)
         {
             _ctx.FillStyle = "gray";
-            _ctx.Rect(location.x, location.y, 5, 5);
+            _ctx.FillRect(location.x, location.y, 2, 2);
         }
     }
 
     public class ChargeSet
     {
         public HashSet<Charge> set { get; }
+        public bool alive = true;
 
         public ChargeSet()
         {
@@ -286,10 +284,44 @@ namespace ChargeLearning.Pages
                 charge.Draw(_ctx);
             }
         }
+    }
 
-        public void EvaluateFitness(Scene scene)
+    public class Particle
+    {
+        public V location { get; set; }
+        public V velocity { get; set; }
+
+        public Scene scene { get; set; }
+        public ChargeSet charges { get; set; }
+
+        public Particle(Scene scene, ChargeSet charges)
         {
+            location = scene.start;
+            velocity = new V(0, 0);
+            this.charges = charges;
+            this.scene = scene;
+        }
 
+        public void PassTime(double delta)
+        {
+            velocity += delta * charges.FieldAtPoint(location);
+            location += delta * velocity;
+
+            if (scene.InBounds(location))
+            {
+
+            }
+        }
+
+        public void Draw(Canvas2dContext _ctx, bool drawCharges)
+        {
+            if (drawCharges)
+            {
+                charges.Draw(_ctx);
+            }
+
+            _ctx.FillStyle = "red";
+            _ctx.FillRect(location.x, location.y, 1, 1);
         }
     }
 
@@ -300,12 +332,12 @@ namespace ChargeLearning.Pages
         public ParticleSet (int herdCount, int chargeCount, double magnitudeFactor, Scene scene)
         {
             set = new HashSet<Particle>();
-            for (int i = 0; i < chargeCount; i++)
+            for (int i = 0; i < herdCount; i++)
             {
                 ChargeSet temp = new ChargeSet();
                 temp.AdjustCount(chargeCount, scene);
                 temp.Mutate(magnitudeFactor, 0, 0, scene);
-                Particle part = new Particle(ref scene, temp);
+                Particle part = new Particle(scene, temp);
                 set.Add(part);
             }
         }
@@ -318,41 +350,20 @@ namespace ChargeLearning.Pages
             }
         }
 
-        
-
-    }
-
-    public class Particle
-    {
-        public V location { get; set; }
-        public V velocity { get; set; }
-
-        public Scene scene { get; set; }
-        public ChargeSet charges { get; set; }
-
-        public Particle (ref Scene scene, ChargeSet charges)
+        public void Draw(Canvas2dContext _ctx, bool drawCharges)
         {
-            location = scene.start;
-            velocity = new V(0, 0);
-            this.charges = charges;
-            this.scene = scene;
+            foreach (Particle part in set)
+            {
+                part.Draw(_ctx, drawCharges);
+            }
         }
 
         public void PassTime (double delta)
         {
-            velocity += delta * charges.FieldAtPoint(location);
-            location += delta * velocity;
-        }
-
-        public void Draw (Canvas2dContext _ctx, bool drawCharges)
-        {
-            if (drawCharges)
+            foreach (Particle part in set)
             {
-                charges.Draw(_ctx);
+                part.PassTime(delta);
             }
-
-            _ctx.FillStyle = "red";
-            _ctx.Rect(location.x, location.y, 5, 5);
         }
     }
 
