@@ -19,15 +19,6 @@ C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Debug\nets
 C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Debug\netstandard2.0\ChargeLearning.AssemblyInfoInputs.cache
 C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Debug\netstandard2.0\ChargeLearning.AssemblyInfo.cs
 C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Debug\netstandard2.0\ChargeLearning.csproj.CopyComplete
-C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Debug\netstandard2.0\BlazorTemp\ChargeLearning.dll
-C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Debug\netstandard2.0\Blazor.components.input.cache
-C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Debug\netstandard2.0\Blazor.definition.components.json
-C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Debug\netstandard2.0\App.g.cs
-C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Debug\netstandard2.0\Pages\Index.g.cs
-C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Debug\netstandard2.0\Pages\_ViewImports.g.cs
-C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Debug\netstandard2.0\Shared\MainLayout.g.cs
-C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Debug\netstandard2.0\Shared\NavMenu.g.cs
-C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Debug\netstandard2.0\_ViewImports.g.cs
 C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\bin\Debug\netstandard2.0\ChargeLearning.pdb
 C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\bin\Debug\netstandard2.0\dist\_framework\_bin\Blazor.Extensions.Canvas.dll
 C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\bin\Debug\netstandard2.0\dist\_framework\_bin\Blazor.Extensions.Canvas.JS.dll
@@ -162,3 +153,29 @@ C:\Users\Will Hamic\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Debu
 C:\Users\Will Hamic\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Debug\netstandard2.0\blazor\inputs.bootjson.cache
 C:\Users\Will Hamic\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Debug\netstandard2.0\blazor\blazor.boot.json
 C:\Users\Will Hamic\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Debug\netstandard2.0\blazor\_content\Blazor.Extensions.Canvas.JS
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\bin\Debug\netstandard2.0\dist\_framework\_bin\Mono.Security.dll
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\bin\Debug\netstandard2.0\dist\_framework\_bin\Newtonsoft.Json.dll
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\bin\Debug\netstandard2.0\dist\_framework\_bin\System.Data.dll
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\bin\Debug\netstandard2.0\dist\_framework\_bin\System.Numerics.dll
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\bin\Debug\netstandard2.0\dist\_framework\_bin\System.Runtime.Serialization.dll
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\bin\Debug\netstandard2.0\dist\_framework\_bin\System.Xml.dll
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\bin\Debug\netstandard2.0\dist\_framework\_bin\System.Xml.Linq.dll
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\bin\Debug\netstandard2.0\dist\_framework\_bin\Newtonsoft.Json.pdb
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\bin\Debug\netstandard2.0\Newtonsoft.Json.dll
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Debug\netstandard2.0\BlazorTemp\ChargeLearning.dll
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Debug\netstandard2.0\Blazor.components.input.cache
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Debug\netstandard2.0\Blazor.definition.components.json
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Debug\netstandard2.0\App.g.cs
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Debug\netstandard2.0\Pages\Index.g.cs
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Debug\netstandard2.0\Pages\_ViewImports.g.cs
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Debug\netstandard2.0\Shared\MainLayout.g.cs
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Debug\netstandard2.0\Shared\NavMenu.g.cs
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Debug\netstandard2.0\_ViewImports.g.cs
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Debug\netstandard2.0\blazor\linker\Mono.Security.dll
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Debug\netstandard2.0\blazor\linker\Newtonsoft.Json.dll
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Debug\netstandard2.0\blazor\linker\System.Data.dll
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Debug\netstandard2.0\blazor\linker\System.Numerics.dll
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Debug\netstandard2.0\blazor\linker\System.Runtime.Serialization.dll
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Debug\netstandard2.0\blazor\linker\System.Xml.dll
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Debug\netstandard2.0\blazor\linker\System.Xml.Linq.dll
+C:\Users\Will\OneDrive\Mine\Code\C#\ChargeLearning\ChargeLearning\obj\Debug\netstandard2.0\blazor\linker\Newtonsoft.Json.pdb

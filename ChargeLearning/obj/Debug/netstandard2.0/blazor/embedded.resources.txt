@@ -7,3 +7,4 @@ C:\Users\Will\.nuget\packages\microsoft.extensions.dependencyinjection\2.1.0\lib
 C:\Users\Will\.nuget\packages\microsoft.extensions.dependencyinjection.abstractions\2.1.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\Users\Will\.nuget\packages\microsoft.jsinterop\0.7.0\lib\netstandard2.0\Microsoft.JSInterop.dll
 C:\Users\Will\.nuget\packages\mono.webassembly.interop\0.7.0\lib\netstandard2.0\Mono.WebAssembly.Interop.dll
+C:\Users\Will\.nuget\packages\newtonsoft.json\12.0.1\lib\netstandard2.0\Newtonsoft.Json.dll

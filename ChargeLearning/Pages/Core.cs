@@ -33,20 +33,14 @@ namespace ChargeLearning.Pages
             if (first)
             {
                 scene = new Scene(0, 500, 0, 500, new V(250, 490), new V(250, 0), 1, new Random());
-
                 parts = new ParticleSet(100, 10, 1000000, scene);
-
                 i = 0;
-
                 first = false;
             }
 
             parts.Draw(_ctx, false);
             parts.PassTime(.05);
-
             
-
-
             i++;
             if (i < 100)
             {
@@ -57,7 +51,7 @@ namespace ChargeLearning.Pages
         public void Evolve()
         {
             _ctx.ClearRect(0, 0, 500, 500);
-            var temp = parts.FindTop(1);
+            LinkedList<Particle> temp = parts.FindTop(1);
             parts = new ParticleSet(100, temp, scene);
         }
         
@@ -72,6 +66,12 @@ namespace ChargeLearning.Pages
         {
             this.x = x;
             this.y = y;
+        }
+
+        public V(V v)
+        {
+            x = v.x;
+            y = v.y;
         }
 
         public static V operator +(V a, V b)
@@ -214,6 +214,12 @@ namespace ChargeLearning.Pages
             this.location = location;
         }
 
+        public Charge(Charge charge)
+        {
+            this.magnitude = charge.magnitude;
+            this.location = new V(charge.location);
+        }
+
         public void Mutate(double magnitudeFactor, double locationFactor, Scene scene)
         {
             magnitude += (scene.random.NextDouble() - 0.5) * magnitudeFactor;
@@ -243,6 +249,15 @@ namespace ChargeLearning.Pages
         public ChargeSet()
         {
             set = new HashSet<Charge>();
+        }
+
+        public ChargeSet(ChargeSet chargeSet)
+        {
+            set = new HashSet<Charge>();
+            foreach (Charge charge in set)
+            {
+                set.Add(new Charge(charge));
+            }
         }
 
         public void AddRandomCharge(Scene scene)
@@ -318,6 +333,14 @@ namespace ChargeLearning.Pages
             this.scene = scene;
         }
 
+        public Particle(Particle particle)
+        {
+            location = new V(particle.scene.start);
+            velocity = new V(0, 0);
+            charges = new ChargeSet(particle.charges);
+            scene = particle.scene;
+        }
+
         public void PassTime(double delta)
         {
             if (!alive)
@@ -380,7 +403,8 @@ namespace ChargeLearning.Pages
 
             for (int i = 0; i < herdCount; i++)
             {
-                set.Add(bestParts.ElementAt(i % bestParts.Count));
+                var nextPart = bestParts.ElementAt(i % bestParts.Count);
+                set.Add(new Particle(nextPart));
             }
         }
 
@@ -423,28 +447,40 @@ namespace ChargeLearning.Pages
 
             foreach (Particle part in set)
             {
-                InsertParticle(count, ref parts, part);
+                parts = InsertParticle(count, part);
             }
-            return parts;
+
+            LinkedList<Particle> copyParts = new LinkedList<Particle>();
+
+            foreach (Particle part in parts)
+            {
+                copyParts.AddLast(new Particle(part));
+            }
+
+            return copyParts;
         }
 
-        public void InsertParticle(int count, ref LinkedList<Particle> parts, Particle insertPart)
+        public LinkedList<Particle> InsertParticle(int count, Particle insertPart)
         {
-            if (parts.Count == 0)
+            LinkedList<Particle> topList = new LinkedList<Particle>();
+            if (topList.Count == 0)
             {
-                parts.AddFirst(insertPart);
+                topList.AddFirst(insertPart);
+                return topList;
             }
-            foreach (Particle testPart in parts)
+            foreach (Particle testPart in topList)
             {
                 if (IsMoreFit(testPart, insertPart))
                 {
-                    parts.AddBefore(parts.Find(testPart), insertPart);
-                    if (parts.Count >= count)
+                    topList.AddBefore(topList.Find(testPart), insertPart);
+                    if (topList.Count >= count)
                     {
-                        parts.Remove(testPart);
+                        topList.Remove(testPart);
                     }
                 }
             }
+
+            return topList;
         }
 
         public static bool IsMoreFit(Particle a, Particle b)
@@ -467,7 +503,7 @@ namespace ChargeLearning.Pages
             else
             {
                 // neither finished
-                return (a.fitness.Item2 > b.fitness.Item2);
+                return (a.fitness.Item2 < b.fitness.Item2);
             }
         }
     }
